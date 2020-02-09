@@ -20,7 +20,7 @@ class App extends Component {
     alert: null
   };
 
-  // search Github Users
+  // search Github Users from Github API
   searchUsers = async text => {
     this.setState({ loading: true });
     const users = await axios.get(
@@ -39,7 +39,7 @@ class App extends Component {
     this.setState({ user: res.data, loading: false });
   };
 
-  // get top 5 repos of a user
+  // get top 5 repos of a user from Github API
   getUserRepos = async username => {
     console.log('Getting Repos for:', username);
     this.setState({ loading: true });
