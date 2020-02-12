@@ -5,6 +5,7 @@ import Repos from './Repos';
 import { Link } from 'react-router-dom';
 
 const User = ({ loading, user, getUser, repos, getUserRepos, match }) => {
+  // effect to fetch user and repo information once when component is mounted
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
