@@ -1,10 +1,15 @@
-import React, { Fragment, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment, useEffect, useContext } from 'react';
+
 import Spinner from '../layouts/Spinner';
 import Repos from './Repos';
 import { Link } from 'react-router-dom';
 
-const User = ({ loading, user, getUser, repos, getUserRepos, match }) => {
+import GithubContext from '../../context/github/githubContext';
+
+const User = ({ match }) => {
+  const githubContext = useContext(GithubContext);
+  const { getUser, loading, user, repos, getUserRepos } = githubContext;
+
   // effect to fetch user and repo information once when component is mounted
   useEffect(() => {
     getUser(match.params.login);
@@ -96,14 +101,6 @@ const User = ({ loading, user, getUser, repos, getUserRepos, match }) => {
       <Repos repos={repos} />
     </Fragment>
   );
-};
-
-User.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
-  repos: PropTypes.array.isRequired,
-  getUser: PropTypes.func.isRequired,
-  getUserRepos: PropTypes.func.isRequired
 };
 
 export default User;
